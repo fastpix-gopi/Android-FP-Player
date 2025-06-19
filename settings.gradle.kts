@@ -17,10 +17,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url = uri("https://maven.pkg.github.com/FastPix/android-data-androidXmedia3")
-        }
-        maven {
-            url = uri("https://maven.pkg.github.com/FastPix/android-core-data-sdk")
+
+            url = uri("https://maven.pkg.github.com/fastpix-gopi/android-data-androidXmedia3")
         }
     }
 }

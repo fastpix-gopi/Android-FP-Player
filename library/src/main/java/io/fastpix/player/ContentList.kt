@@ -108,9 +108,6 @@ object ContentList {
             }
             .build()
 
-
-//    base.appendQueryParameter("redundantStreams", "true");
-
         return base.toString()
     }
 

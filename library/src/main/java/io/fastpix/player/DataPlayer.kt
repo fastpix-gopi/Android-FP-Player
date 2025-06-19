@@ -50,7 +50,7 @@ class DataPlayer private constructor(
 
     init {
         val customOptionsStaging = CustomOptions()
-        customOptionsStaging.setBeaconDomain("metrix.ninja")
+        customOptionsStaging.setBeaconDomain("metrix.guru")
         fastPixBaseMedia3Player =
             FastPixBaseMedia3Player(
                 context,

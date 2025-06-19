@@ -151,7 +151,7 @@ class ConfigurablePlayerActivity : AppCompatActivity() {
   @OptIn(UnstableApi::class)
   private fun createPlayer(context: Context): DataPlayer {
     val customerPlayerDataEntity = CustomerPlayerDataEntity()
-    customerPlayerDataEntity.workspaceKey = "1065425106984894467"
+    customerPlayerDataEntity.workspaceKey = "1082179305773531137"
 
     customerPlayerDataEntity.playerVersion = "0.1"
     customerPlayerDataEntity.subPropertyId = "NA"
@@ -162,8 +162,8 @@ class ConfigurablePlayerActivity : AppCompatActivity() {
     val customerVideoDataEntity = CustomerVideoDataEntity()
 
     customerVideoDataEntity.videoId = "itemId"
-    customerVideoDataEntity.videoTitle = "title"//!!.text.toString()
-    customerVideoDataEntity.videoSourceUrl = "https://stream.fastpix.app/139f8137-e86a-4372-803d-4bca13b7a874.m3u8"
+    customerVideoDataEntity.videoTitle = "title "+playbackParamsHelper.playbackIdOrDefault()//!!.text.toString()
+    customerVideoDataEntity.videoSourceUrl = "https://test.m3u8"
 
     val customerViewDataEntity = CustomerViewDataEntity()
     customerViewDataEntity.viewSessionId = UUID.randomUUID().toString()
@@ -181,7 +181,12 @@ class ConfigurablePlayerActivity : AppCompatActivity() {
     customerDataEntity.setCustomData(customDataEntity)
 
 
-    val out: DataPlayer = DataPlayer.Builder(context).pushMonitoringData(customerDataEntity).build()
+    val out: DataPlayer = DataPlayer.Builder(context).pushMonitoringData(customerDataEntity)
+      .configureExoPlayer {
+        setHandleAudioBecomingNoisy(true)
+        setSeekBackIncrementMs(10_000)
+        setSeekForwardIncrementMs(10_000)
+      }.build()
 
     out.addListener(object : Player.Listener {
       override fun onPlayerError(error: PlaybackException) {
