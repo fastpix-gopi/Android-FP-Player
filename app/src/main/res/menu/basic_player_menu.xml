@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+  <item
+    android:id="@+id/player_menu_submenu_res"
+    android:title="@string/menu_res"
+    >
+    <menu>
+      <item
+        android:id="@+id/player_menu_unspecified"
+        android:title="@string/menu_unspecified_res"
+        />
+      <item
+          android:id="@+id/player_menu_480"
+          android:title="@string/menu_480p"
+          />
+      <item
+          android:id="@+id/player_menu_540"
+          android:title="@string/menu_540p"
+          />
+      <item
+        android:id="@+id/player_menu_720"
+        android:title="@string/menu_720p"
+        />
+      <item
+        android:id="@+id/player_menu_1080"
+        android:title="@string/menu_1080p"
+        />
+      <item
+        android:id="@+id/player_menu_1440"
+        android:title="@string/menu_1440p"
+        />
+      <item
+        android:id="@+id/player_menu_2160"
+        android:title="@string/menu_2160p"
+        />
+    </menu>
+  </item>
   <item
     android:id="@+id/player_menu_submenu_max_res"
     android:title="@string/menu_max_res"
@@ -83,8 +119,8 @@
         android:title="@string/menu_descending"
         />
       <item
-        android:id="@+id/player_menu_default"
-        android:title="@string/menu_default"
+        android:id="@+id/player_menu_ascending"
+        android:title="@string/menu_ascending"
         />
     </menu>
   </item>

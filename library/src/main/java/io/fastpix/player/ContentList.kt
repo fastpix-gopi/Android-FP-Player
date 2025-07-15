@@ -1,46 +1,18 @@
 package io.fastpix.player
 
-import android.app.Activity
-import android.content.Context
-import android.graphics.Color
 import android.net.Uri
-import android.view.Gravity
-import android.widget.FrameLayout
-import android.widget.TextView
+import android.util.Log
 import androidx.media3.common.MediaItem
 
 object ContentList {
-
-    private const val DEFAULT_DOMAIN = "stream.fastpix.app"
+    private const val DEFAULT_DOMAIN = "stream.fastpix.io"
     private const val STREAM_TYPE = "on-demand"
 
-    fun contentPlaybackId(
-        context: Context,
-        playbackId: String,
-        maxResolution: PlaybackResolution? = null,
-        minResolution: PlaybackResolution? = null,
-        renditionOrder: RenditionOrder? = null,
-        customDomain: String? = DEFAULT_DOMAIN,
-        streamType: String? = STREAM_TYPE,
-        playbackToken: String? = null
-    ): MediaItem = createCustomPlaybackUri(
-        context,
-        playbackId,
-        maxResolution,
-        minResolution,
-        renditionOrder,
-        customDomain,
-        streamType,
-        playbackToken
-    ).build()
-
-    @JvmStatic
-    @JvmOverloads
     fun createCustomPlaybackUri(
-        context: Context,
         playbackId: String,
         maxResolution: PlaybackResolution? = null,
         minResolution: PlaybackResolution? = null,
+        resolution: PlaybackResolution? = null,
         renditionOrder: RenditionOrder? = null,
         customDomain: String? = DEFAULT_DOMAIN,
         streamType: String? = STREAM_TYPE,
@@ -49,12 +21,12 @@ object ContentList {
         return MediaItem.Builder()
             .setUri(
                 createPlaybackUrl(
-                    context = context,
                     playbackId = playbackId,
                     customDomain = customDomain ?: DEFAULT_DOMAIN,
                     streamType = streamType ?: STREAM_TYPE,
                     maxResolution = maxResolution,
                     minResolution = minResolution,
+                    resolution = resolution,
                     renditionOrder = renditionOrder,
                     playbackToken = playbackToken,
                 )
@@ -62,58 +34,50 @@ object ContentList {
     }
 
     private fun createPlaybackUrl(
-        context: Context,
         playbackId: String,
         customDomain: String = DEFAULT_DOMAIN,
         streamType: String? = STREAM_TYPE,
         maxResolution: PlaybackResolution? = null,
         minResolution: PlaybackResolution? = null,
+        resolution: PlaybackResolution? = null,
         renditionOrder: RenditionOrder? = null,
         playbackToken: String? = null,
     ): String {
         if (streamType !in listOf("on-demand", "live-stream")) {
             return "streamType no matched"
         }
-        if (streamType.equals("live-stream")) {
-            val button = TextView(context).apply {
-                text = "Live"
-                textSize = 16f // smaller text size
-                setPadding(20, 10, 20, 10) // smaller padding
-//                setBackgroundColor(Color.RED) // background color
-                setTextColor(Color.RED) // text color
-            }
-
-            val params = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                marginStart = 10
-                topMargin = 10 // optional: add top margin
-                gravity = Gravity.TOP or Gravity.START
-            }
-
-            (context as Activity).addContentView(button, params)
-
-        }
         val base = Uri.Builder()
             .scheme("https")
             .authority(customDomain)
             .appendPath("$playbackId.m3u8")
             .apply {
-                minResolution?.let { appendQueryParameter("minResolution", resolutionValue(it)) }
-                maxResolution?.let { appendQueryParameter("maxResolution", resolutionValue(it)) }
+                minResolution?.let {
+                    appendQueryParameter(
+                        "minResolution",
+                        resolutionValue(it)
+                    )
+                }
+                maxResolution?.let {
+                    appendQueryParameter(
+                        "maxResolution",
+                        resolutionValue(it)
+                    )
+                }
+                resolution?.let { appendQueryParameter("resolution", resolutionValue(it)) }
                 renditionOrder?.takeIf { it != RenditionOrder.Default }
                     ?.let { appendQueryParameter("renditionOrder", resolutionValue(it)) }
                 playbackToken?.let { appendQueryParameter("token", it) }
             }
             .build()
 
+        Log.e("base", base.toString())
         return base.toString()
     }
 
     private fun resolutionValue(renditionOrder: RenditionOrder): String {
         return when (renditionOrder) {
             RenditionOrder.Descending -> "desc"
+            RenditionOrder.Ascending -> "asc"
             else -> "" // should be avoided by createPlaybackUrl
         }
     }
@@ -149,6 +113,7 @@ enum class RenditionOrder {
      * setting emphasizes video quality, but may lead to more interruptions on unfavorable networks
      */
     Descending,
+    Ascending,
 
     /**
      * The default rendition order will be used, which may be optimized for delivery

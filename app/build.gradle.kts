@@ -69,6 +69,10 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("io.fastpix.localtesting:media3:1.0.3")
+    implementation("io.fastpix.localtesting:media3:1.0.11")
+    implementation("com.mux.player:android:1.3.0")
+
+//    implementation("com.mux.stats.sdk.muxstats:data-media3:1.0.0")
+
 
 }

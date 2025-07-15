@@ -18,7 +18,6 @@ class DataPlayer private constructor(
     private var fastPixBaseMedia3Player: FastPixBaseMedia3Player? = null
     private var released: Boolean = false
 
-
     fun bindAnalyticsListener(listener: AnalyticsListener) {
         exoPlayer.addAnalyticsListener(listener)
     }
@@ -58,6 +57,8 @@ class DataPlayer private constructor(
                 dynamicCustomerData,
                 customOptionsStaging
             )
+
+        fastPixBaseMedia3Player?.isItAutoPlay=exoPlayer.playWhenReady
     }
     class Builder private constructor(
         private val context: Context,
@@ -71,6 +72,7 @@ class DataPlayer private constructor(
             this.customerDataEntity.setCustomerVideoData(customerData.customerVideoData)
             this.customerDataEntity.setCustomerViewData(customerData.customerViewData)
             this.customerDataEntity.setCustomData(customerData.customData)
+
 
             return this
         }
