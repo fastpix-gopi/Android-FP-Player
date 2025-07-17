@@ -18,7 +18,7 @@
             app:layout_constraintDimensionRatio="4:3"
             app:layout_constraintTop_toTopOf="parent"
             app:show_subtitle_button="true"/>
-
+<!--
 
         <androidx.media3.ui.PlayerView
 
@@ -68,7 +68,7 @@
                 android:layout_marginBottom="4dp"
                 app:hint="@string/unspecified_stream_type"
                 app:title="@string/label_stream_type" />
-           <!-- <TextView
+           &lt;!&ndash; <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:text="live-stream"
                     android:layout_marginStart="16dp" />
-            </RadioGroup>-->
+            </RadioGroup>&ndash;&gt;
 
             <io.fastpix.fastpixplayer.TextParamEntryView
                 android:id="@+id/configurable_player_playback_token"
@@ -122,7 +122,7 @@
                 android:padding="10dp"
                 app:title="@string/final_url" />
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -40,6 +40,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("io.fastpix.localtesting:media3:1.0.11")
+    implementation("io.fastpix.data:media3:1.0.1")
 
 }

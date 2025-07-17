@@ -17,12 +17,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-
-            url = uri("https://maven.pkg.github.com/fastpix-gopi/android-data-androidXmedia3")
-
-        }
-        maven {
-            url =uri("https://muxinc.jfrog.io/artifactory/default-maven-release-local")
+            url = uri("https://maven.pkg.github.com/FastPix/android-data-androidXmedia3")
         }
     }
 }
