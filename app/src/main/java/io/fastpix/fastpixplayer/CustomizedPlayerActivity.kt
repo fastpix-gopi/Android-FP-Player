@@ -18,6 +18,8 @@ import io.fastpix.data.entity.CustomerViewDataEntity
 import io.fastpix.fastpixplayer.databinding.ActivityConfigurablePlayerBinding
 import io.fastpix.player.FastPixUrlGenerator
 import io.fastpix.player.MediaFastPixPlayer
+import io.fastpix.player.PlaybackResolution
+import io.fastpix.player.RenditionOrder
 import java.util.UUID
 
 class ConfigurablePlayerActivity : AppCompatActivity() {
@@ -32,17 +34,6 @@ class ConfigurablePlayerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityConfigurablePlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            val bars = insets.getInsets(
-                WindowInsetsCompat.Type.systemBars()
-                        or WindowInsetsCompat.Type.displayCutout()
-            )
-            v.updatePadding(
-                top = bars.top,
-                bottom = bars.bottom,
-            )
-            WindowInsetsCompat.CONSUMED
-        }
     }
 
     override fun onStart() {
@@ -73,13 +64,13 @@ class ConfigurablePlayerActivity : AppCompatActivity() {
         FastPixUrlGenerator.setPlayerListener(fastPixListener)
         val mediaItem = FastPixUrlGenerator.createCustomPlaybackUri(
             playbackId = "6859b77a-a0bd-473f-85fe-3f9d8de88155",
-//            minResolution = PlaybackResolution.LD_480,
-//            maxResolution = PlaybackResolution.FHD_1080,
-//            resolution = PlaybackResolution.LD_480,
-//            renditionOrder = RenditionOrder.Descending,
-//            playbackToken = "",
-//            customDomain = "",
-//            streamType = "lll"
+            minResolution = PlaybackResolution.LD_480,
+            maxResolution = PlaybackResolution.FHD_1080,
+            resolution = PlaybackResolution.LD_480,
+            renditionOrder = RenditionOrder.Descending,
+            playbackToken = "",
+            customDomain = "",
+            streamType = "on-demand"
         )?:return
         if (player != null ) {
             player!!.playWhenReady = false

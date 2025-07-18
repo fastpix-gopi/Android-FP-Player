@@ -69,7 +69,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("io.fastpix.localtesting:media3:1.0.11")
+    implementation("io.fastpix.data:media3:1.0.1")
 
 //    implementation("com.mux.stats.sdk.muxstats:data-media3:1.0.0")
 
